@@ -28,8 +28,22 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.java') }}
+          key: ${{ runner.os }}-sonar-${{ hashFiles('/*.java') }}
           restore-keys: |
             ${{ runner.os }}-sonar-
+
+      # SonarQube Scan
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run your build and tests
+        run: |
+          # Replace with your build command (e.g., mvn clean install, npm run build, etc.)
+          echo "Running build..."
 
     
