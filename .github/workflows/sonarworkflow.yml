@@ -32,24 +32,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sonar-
 
-      # SonarQube Scan
-  sonarcloud:
-    name: SonarCloud Scan
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up SonarCloud
-        uses: sonarsource/sonarcloud-github-action@v2
-        with:
-          # You can specify your project settings in sonar-project.properties or use env variables
-          sonar-token: ${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set in your secrets
-          organization: 'your-sonarcloud-organization'  # This is an optional parameter
-          projectKey: 'your-project-key'  # This is an optional parameter
-
-      - name: Run your build and tests
+      # SonarQube Scan (Assuming the sonar-scanner is installed and available)
+      - name: Run SonarQube Scanner
         run: |
-          # Replace with your build command (e.g., mvn clean install, npm run build, etc.)
-          echo "Running build..."
+          # Replace with your SonarQube scanner command, for example:
+          sonar-scanner \
+            -Dsonar.projectKey=your-project-key \
+            -Dsonar.sources=src \
+            -Dsonar.host.url=https://your.sonarqube.server
