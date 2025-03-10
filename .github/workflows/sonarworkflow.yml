@@ -32,11 +32,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sonar-
 
-      # SonarQube Scan (Assuming the sonar-scanner is installed and available)
-      - name: Run SonarQube Scanner
-        run: |
-          # Replace with your SonarQube scanner command, for example:
-          sonar-scanner \
-            -Dsonar.projectKey=your-project-key \
-            -Dsonar.sources=src \
-            -Dsonar.host.url=https://your.sonarqube.server
+    
