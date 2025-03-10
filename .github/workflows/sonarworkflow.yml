@@ -25,7 +25,7 @@ jobs:
 
       # Cache SonarQube scanner dependencies
       - name: Cache SonarQube dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar-${{ hashFiles('**/*.java') }}
