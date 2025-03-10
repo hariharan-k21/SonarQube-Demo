@@ -21,7 +21,7 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
-          distribution: 'adoptopenjdk'  # You can also use 'zulu' or other supported distributions
+          distribution: 'temurin'  # You can also use 'zulu' or other supported distributions
           java-version: '11'           
 
       # Cache SonarQube scanner dependencies
