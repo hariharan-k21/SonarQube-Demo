@@ -11,18 +11,17 @@ on:
 jobs:
   sonarQube:
     runs-on: ubuntu-latest
-
-      steps:
+    steps:
       # Checkout the code
-        - name: Checkout Code
-          uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
       # Set up JDK (assuming you're using Java)
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'  # You can also use 'zulu' or other supported distributions
-          java-version: '11'           
+          java-version: '11'
 
       # Cache SonarQube scanner dependencies
       - name: Cache SonarQube dependencies
@@ -34,32 +33,23 @@ jobs:
             ${{ runner.os }}-sonar-
 
       # SonarQube Scan
-      name: SonarCloud Scan
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
 
-       on:
-        push:
-          branches:
-            - main
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-       jobs:
-         sonarcloud:
-           name: Analyze on SonarCloud
-           runs-on: ubuntu-latest
+      - name: Set up SonarCloud
+        uses: sonarsource/sonarcloud-github-action@v2
+        with:
+          # You can specify your project settings in sonar-project.properties or use env variables
+          sonar-token: ${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set in your secrets
+          organization: 'your-sonarcloud-organization'  # This is an optional parameter
+          projectKey: 'your-project-key'  # This is an optional parameter
 
-           steps:
-              - name: Checkout code
-                uses: actions/checkout@v2
-
-              - name: Set up SonarCloud
-                uses: sonarsource/sonarcloud-github-action@v2
-                with:
-        # You can specify your project settings in sonar-project.properties or use env variables
-                  sonar-token: ${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set in your secrets
-                  organization: 'your-sonarcloud-organization'  # This is an optional parameter
-                  projectKey: 'your-project-key'  # This is an optional parameter
-
-              - name: Run your build and tests
-                run: |
-        # Replace with your build command (e.g., mvn clean install, npm run build, etc.)
-                 echo "Running build..."
-
+      - name: Run your build and tests
+        run: |
+          # Replace with your build command (e.g., mvn clean install, npm run build, etc.)
+          echo "Running build..."
