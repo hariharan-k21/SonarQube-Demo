@@ -12,10 +12,10 @@ jobs:
   sonarQube:
     runs-on: ubuntu-latest
 
-    steps:
+      steps:
       # Checkout the code
-      - name: Checkout Code
-        uses: actions/checkout@v2
+        - name: Checkout Code
+          uses: actions/checkout@v2
 
       # Set up JDK (assuming you're using Java)
       - name: Set up Java
