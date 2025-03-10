@@ -34,10 +34,32 @@ jobs:
             ${{ runner.os }}-sonar-
 
       # SonarQube Scan
-      - name: SonarQube Scan
-        uses: sonarsource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectKey: your-sonar-project-key
-          organization: your-sonar-organization
+      name: SonarCloud Scan
+
+       on:
+        push:
+          branches:
+            - main
+
+       jobs:
+         sonarcloud:
+           name: Analyze on SonarCloud
+           runs-on: ubuntu-latest
+
+           steps:
+              - name: Checkout code
+                uses: actions/checkout@v2
+
+              - name: Set up SonarCloud
+                uses: sonarsource/sonarcloud-github-action@v2
+                with:
+        # You can specify your project settings in sonar-project.properties or use env variables
+                  sonar-token: ${{ secrets.SONAR_TOKEN }}  # Ensure SONAR_TOKEN is set in your secrets
+                  organization: 'your-sonarcloud-organization'  # This is an optional parameter
+                  projectKey: 'your-project-key'  # This is an optional parameter
+
+              - name: Run your build and tests
+                run: |
+        # Replace with your build command (e.g., mvn clean install, npm run build, etc.)
+                 echo "Running build..."
+
