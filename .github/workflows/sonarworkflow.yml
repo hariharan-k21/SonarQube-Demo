@@ -18,11 +18,10 @@ jobs:
         uses: actions/checkout@v2
 
       # Set up JDK (assuming you're using Java)
-      - name: Set up JDK 11
+      - name: Set up Java
         uses: actions/setup-java@v2
         with:
           distribution: 'adoptopenjdk'  # You can also use 'zulu' or other supported distributions
-          version: '11'  # specify the Java version (e.g., '11', '17', etc.)
           java-version: '11'           
 
       # Cache SonarQube scanner dependencies
